@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestor de Tickets con Historial</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>🎛 Ticket Rápido</h2>
+
+      <label
+        >Tipo incidencia:
+        <select id="tipoIncidencia" onchange="actualizarPreview()">
+          <option value="">-- Seleccionar incidencia --</option>
+
+          <!-- Hardware -->
+          <option value="🖨️ Impresora">🖨️ Impresora</option>
+          <option value="💻 Ordenador lento">💻 Ordenador lento</option>
+          <option value="💻 Ordenador no enciende">
+            💻 Ordenador no enciende
+          </option>
+          <option value="💾 Disco duro lleno">💾 Disco duro lleno</option>
+          <option value="🔊 Sonido no funciona">🔊 Sonido no funciona</option>
+          <option value="🖥️ Monitor no da imagen">
+            🖥️ Monitor no da imagen
+          </option>
+
+          <!-- Red -->
+          <option value="🌐 Sin conexión">🌐 Sin conexión</option>
+          <option value="🌐 WiFi no disponible">🌐 WiFi no disponible</option>
+          <option value="🌐 Cable de red desconectado">
+            🌐 Cable de red desconectado
+          </option>
+
+          <!-- Correo -->
+          <option value="📧 Correo">📧 Correo</option>
+          <option value="📧 Correo - No puede ingresar">
+            📧 Correo - No puede ingresar
+          </option>
+          <option value="📧 Correo - Error de inicio de sesión">
+            📧 Correo - Error de inicio de sesión
+          </option>
+          <option value="📧 Correo - No recibe mensajes">
+            📧 Correo - No recibe mensajes
+          </option>
+          <option value="📧 Correo - No puede enviar mensajes">
+            📧 Correo - No puede enviar mensajes
+          </option>
+          <option value="📧 Correo - Configuración firma">
+            📧 Correo - Configuración firma
+          </option>
+
+          <!-- Aplicaciones médicas -->
+          <option value="📝 HCIS no abre">📝 HCIS no abre</option>
+          <option value="📝 HCIS - Error al generar informes">
+            📝 HCIS - Error al generar informes
+          </option>
+          <option value="📝 HCIS - Perfil sin acceso a módulos">
+            📝 HCIS - Perfil sin acceso a módulos
+          </option>
+          <option value="📝 HICS - Perfil sin acceso algunas areas">
+            📝 HICS - Perfil sin acceso algunas áreas
+          </option>
+          <option value="📝 Modulab no carga">📝 Modulab no carga</option>
+          <option value="📝 Servolab sin acceso">📝 Servolab sin acceso</option>
+
+          <!-- Directorio Activo y permisos -->
+          <option value="👥 Alta de usuario en Directorio Activo">
+            👥 Alta de usuario en Directorio Activo
+          </option>
+          <option value="👥 Baja de usuario en Directorio Activo">
+            👥 Baja de usuario en Directorio Activo
+          </option>
+          <option value="🔐 Modificar grupo CAT_ en Directorio Activo">
+            🔐 Modificar grupo CAT_ en Directorio Activo
+          </option>
+          <option value="🔐 Solicitud de permisos específicos">
+            🔐 Solicitud de permisos específicos
+          </option>
+
+          <!-- Equipos periféricos -->
+          <option value="🖨️ Impresora - Atasco de papel">
+            🖨️ Impresora - Atasco de papel
+          </option>
+          <option value="🖨️ Impresora - No imprime desde aplicación">
+            🖨️ Impresora - No imprime desde aplicación
+          </option>
+
+          <!-- Otras incidencias -->
+          <option value="🔒 Olvido de contraseña">
+            🔒 Olvido de contraseña
+          </option>
+          <option value="🔒 Cambio de contraseña caducada">
+            🔒 Cambio de contraseña caducada
+          </option>
+          <option value="📝 Solicitud de software">
+            📝 Solicitud de software
+          </option>
+          <option value="📝 Instalación de programa">
+            📝 Instalación de programa
+          </option>
+          <option value="📝 Configuración de acceso remoto">
+            📝 Configuración de acceso remoto
+          </option>
+          <option value="📝 Otro">📝 Otro</option>
+        </select>
+      </label>
+
+      <label
+        ><input type="checkbox" onclick="toggle('descripcion')" /> Descripción
+        Incidencia</label
+      >
+      <textarea
+        id="descripcion"
+        rows="2"
+        class="hidden"
+        oninput="actualizarPreview()"
+      ></textarea>
+
+      <label
+        ><input type="checkbox" onclick="toggle('usuario')" /> Usuario</label
+      >
+      <input
+        id="usuario"
+        type="text"
+        class="hidden"
+        oninput="actualizarPreview()"
+      />
+
+      <label
+        ><input type="checkbox" onclick="toggle('equipo')" /> IP / Equipo</label
+      >
+      <input
+        id="equipo"
+        type="text"
+        class="hidden"
+        oninput="actualizarPreview()"
+      />
+
+      <label
+        ><input type="checkbox" onclick="toggle('bloqueUbicacion')" /> 📍
+        Ubicación</label
+      >
+      <div id="bloqueUbicacion" class="hidden">
+        <select id="edificio" onchange="actualizarPreview()">
+          <option value="">Selecciona Edificio/Área</option>
+          <option value="Materno Infantil">Materno Infantil</option>
+          <option value="Consultas Externas">Consultas Externas</option>
+          <option value="Centro Oncológico">Centro Oncológico</option>
+          <option value="Anatomía Patológica">Anatomía Patológica</option>
+          <option value="Microbiología / Bioquímica">
+            Microbiología / Bioquímica
+          </option>
+          <option value="Administrativo">Administrativo</option>
+          <option value="Central">Central</option>
+          <option value="Clínica">Clínica</option>
+          <option value="Centro Quirúrgico">Centro Quirúrgico</option>
+          <option value="Farmacia">Farmacia</option>
+          <option value="Psiquiatría">Psiquiatría</option>
+          <option value="Docente">Docente</option>
+          <option value="Gobierno">Gobierno</option>
+        </select>
+
+        <select id="planta" onchange="actualizarPreview()">
+          <option value="">Planta</option>
+          <option value="-2">-2</option>
+          <option value="-1">-1</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+
+        <input
+          id="puerta"
+          type="text"
+          placeholder="Puerta"
+          oninput="actualizarPreview()"
+        />
+
+        <input
+          id="referencia"
+          type="text"
+          placeholder="Referencia (opcional)"
+          oninput="actualizarPreview()"
+        />
+      </div>
+
+      <label
+        ><input type="checkbox" onclick="toggle('afecta')" /> Afecta a
+        más</label
+      >
+      <select id="afecta" class="hidden" onchange="actualizarPreview()">
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <label
+        ><input type="checkbox" onclick="toggle('antes')" /> Antes
+        funcionaba</label
+      >
+      <select id="antes" class="hidden" onchange="actualizarPreview()">
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <label
+        ><input type="checkbox" onclick="toggle('otroEquipo')" /> Probó otro
+        equipo</label
+      >
+      <select id="otroEquipo" class="hidden" onchange="actualizarPreview()">
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <label
+        ><input type="checkbox" onclick="toggle('ruta')" /> Ruta error</label
+      >
+      <textarea
+        id="ruta"
+        rows="2"
+        class="hidden"
+        oninput="actualizarPreview()"
+      ></textarea>
+
+      <label
+        ><input type="checkbox" onclick="toggle('captura')" /> Captura
+        adjunta</label
+      >
+      <select id="captura" class="hidden" onchange="actualizarPreview()">
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <label><input type="checkbox" onclick="toggle('nhc')" /> NHC</label>
+      <input
+        id="nhc"
+        type="text"
+        class="hidden"
+        oninput="actualizarPreview()"
+      />
+
+      <label
+        ><input type="checkbox" onclick="toggle('pruebas')" /> Pruebas</label
+      >
+      <textarea
+        id="pruebas"
+        rows="2"
+        class="hidden"
+        oninput="actualizarPreview()"
+      ></textarea>
+
+      <label
+        ><input type="checkbox" onclick="toggle('observaciones')" /> Obs</label
+      >
+      <textarea
+        id="observaciones"
+        rows="2"
+        class="hidden"
+        oninput="actualizarPreview()"
+      ></textarea>
+
+      <button onclick="copiarYGuardar()">📋 Copiar y Guardar</button>
+      <div id="mensajeCopiado" class="copiado hidden">
+        ✅ Copiado y Guardado
+      </div>
+
+      <div class="preview" id="previewTexto"></div>
+
+      <div class="historial">
+        <h2>📜 Historial</h2>
+        <div id="historialTickets"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

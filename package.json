@@ -1,0 +1,15 @@
+{
+  "name": "Plantillas de Ticket CAU",
+  "version": "1.0.0",
+  "description": "Plantillas de Ticket CAU",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve"
+  },
+  "keywords": ["html", "css"],
+  "author": "Ives van Hoorne",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "11.2.0"
+  }
+}
