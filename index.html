@@ -5,8 +5,9 @@
     <title>Gestor de Tickets con Historial</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body id="body">
     <div class="sidebar">
+      <button onclick="toggleDarkMode()" class="darkmode-toggle">🌙/☀️</button>
       <h2>🎛 Ticket Rápido</h2>
 
       <label
@@ -265,7 +266,7 @@
       ></textarea>
 
       <button onclick="copiarYGuardar()">📋 Copiar y Guardar</button>
-      <div id="mensajeCopiado" class="copiado hidden">
+      <div id="mensajeCopiado" class="hidden copiado">
         ✅ Copiado y Guardado
       </div>
 
