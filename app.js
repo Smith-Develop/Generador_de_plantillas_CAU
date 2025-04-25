@@ -1,3 +1,7 @@
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
 function toggle(id) {
   document.getElementById(id).classList.toggle("hidden");
   actualizarPreview();
